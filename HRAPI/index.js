@@ -15,6 +15,7 @@ app.get('/',async(req,res)=>{
     }
 });
 
+
 app.get('/country',async(req,res)=>{
     try{
         const result= await pool.query('select * from countries');
@@ -44,7 +45,14 @@ app.get('/region',async(req,res)=>{
     }
 });
 
-
+app.get('/employees',async(req,res)=>{
+    try{
+        const result= await pool.query('select e.first_name, e.last_name, e.employee_id, jd.* from employees e left join job_history jd on jd.employee_id=e.employee_id limit 4');
+        res.json(result.rows);
+    }catch(err){
+        res.status(500).json({Error: err.message});
+    }
+});
 
 
 
