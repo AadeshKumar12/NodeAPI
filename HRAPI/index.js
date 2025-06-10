@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.get('/',async(req,res)=>{
     try{
-        res.json('WELCOME TO HR API');
+        res.json('WELCOME TO FERTILIZER AND PESTICIDE MANAGEMENT SYSTEM');
     }catch(err){
         res.status(500).json({Error:err.message});
     }

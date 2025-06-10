@@ -23,6 +23,67 @@
       <tbody></tbody>
     </table>
   </div>
+  <div class="container mb-4">
+  <h3>Add Account</h3>
+  <form id="accountForm" class="border p-3 rounded bg-light">
+    <div class="row mb-2">
+      <div class="col-md-3">
+        <label for="account_id" class="form-label">Account ID</label>
+        <input type="text" class="form-control" id="account_id" required>
+      </div>
+      <div class="col-md-3">
+        <label for="entry_type" class="form-label">Entry Type</label>
+        <input type="text" class="form-control" id="entry_type" required>
+      </div>
+      <div class="col-md-3">
+        <label for="account_description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="account_description" required>
+      </div>
+      <div class="col-md-3">
+        <label for="account_date" class="form-label">Date</label>
+        <input type="date" class="form-control" id="account_date" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Add Account</button>
+  </form>
+  <div id="accountMsg" class="mt-2 text-success"></div>
+</div>
+
+<script>
+const postURL = "https://probable-cod-jj9v795jg6762wxj-6006.app.github.dev/accs";
+
+document.getElementById("accountForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const newAccount = {
+    account_id: document.getElementById("account_id").value,
+    entry_type: document.getElementById("entry_type").value,
+    account_description: document.getElementById("account_description").value,
+    account_date: document.getElementById("account_date").value
+  };
+
+  fetch(postURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newAccount)
+  })
+    .then(response => {
+      if (!response.ok) throw new Error("Insert failed");
+      return response.json();
+    })
+    .then(data => {
+      document.getElementById("accountMsg").textContent = "Account added successfully!";
+      document.getElementById("accountForm").reset();
+    })
+    .catch(err => {
+      document.getElementById("accountMsg").textContent = "Failed to add account.";
+      console.error(err);
+    });
+});
+</script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
