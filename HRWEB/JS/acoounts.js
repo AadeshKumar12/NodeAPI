@@ -69,9 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
           tbody.appendChild(row);
         });
       })
+      
       .catch((err) => {
         console.error("Error loading data:", err.message);
         tbody.innerHTML = "<tr><td colspan='4' class='text-danger text-center'>Failed to load data</td></tr>";
       });
+   
+
   }
 });
